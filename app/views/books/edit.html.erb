@@ -1,0 +1,12 @@
+<%= form_for @book, url: update_book_path(@book), html: {class: "edit-form"},:action => "update" do |f| %>
+  <%= f.label :title %>
+  <%= f.text_field :title %>
+
+  <%= f.label :author %>
+  <%= f.text_field :author, value: @book.author.name %>
+
+  <%= f.label :description %>
+  <%= f.text_field :description %>
+
+  <%= f.submit %>
+<% end %>

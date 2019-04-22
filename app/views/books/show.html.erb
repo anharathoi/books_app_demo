@@ -1,0 +1,9 @@
+<div class="show-page">
+  <h2><%= @book.title %></h2>
+  <hr>
+  <p>Author: <%=link_to  @book.author.name.upcase, author_path(@book.author) %></p>
+  <p>Description: <%= @book.description %></p>
+    <%= link_to "edit", edit_book_path(@book) %>
+    <%= link_to "delete", update_book_path(@book), method: :delete %>
+  </div>
+</div>

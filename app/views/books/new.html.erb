@@ -1,0 +1,12 @@
+<%= form_for @book, url: books_create_path,html: {class: "edit-form"}, :action => "create" do |f| %>
+  <%= f.label :title %>
+  <%= f.text_field :title %>
+
+  <%= f.label :author %>
+  <%= f.text_field :author %>
+
+  <%= f.label :description %>
+  <%= f.text_field :description %>
+
+  <%= f.submit %>
+<% end %>

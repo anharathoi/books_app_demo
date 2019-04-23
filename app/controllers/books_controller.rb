@@ -19,10 +19,7 @@ class BooksController < ApplicationController
 
   def create
     unless current_user.nil?
-      @author_exists = Author.all.find_by(name: params[:author])
-      @author = @author_exists.nil? ? Author.create(name: params[:book][:author]) : @author_exists
-      # binding.pry
-
+      @author = Author.all.find_by(name: params[:name])
       @book = Book.new(book_params)
       @book.author_id = @author.id
       @book.save
@@ -38,7 +35,11 @@ class BooksController < ApplicationController
 
   def update
     @book = Book.find(params[:id])
+    @author = Author.all.find_by(name: params[:name])
     @book.update(book_params)
+    @book.author_id =  @author.id
+    @book.save
+
     # @book.title = params[:book][:title]
     # @book.author = params[:book][:author]
     # @book.description = params[:book][:description]

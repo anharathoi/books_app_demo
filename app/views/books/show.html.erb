@@ -3,6 +3,29 @@
   <hr>
   <p>Author: <%=link_to  @book.author.name.upcase, author_path(@book.author) %></p>
   <p>Description: <%= @book.description %></p>
+  
+  <% unless @book.reviews.nil? %>
+    <h4>Reviews</h4>
+    <hr>
+    <% @book.reviews.each do | review |%>
+      <h5>Title: <%= review.title%> </h5>
+      <h6>Posted on: <%= review.created_at.strftime("%Y-%m-%d") %></h6>
+      <p><%= review.review %></p>
+      <hr>
+    <% end %>
+  <% end %>
+
+    <h4>Leave a review!</h4>
+    <%= form_for(@review, url: create_review_path) do |f| %>
+      <%= f.label :title %>
+      <%= f.text_field :title %>
+
+      <%= f.label :review %>
+      <%= f.text_field :review %>
+      <%= hidden_field_tag(:book_id, @book.id) %>
+      <%= f.submit %>
+    <% end %>
+
     <%= link_to "edit", edit_book_path(@book) %>
     <%= link_to "delete", update_book_path(@book), method: :delete %>
   </div>

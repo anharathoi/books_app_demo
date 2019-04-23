@@ -7,6 +7,7 @@ class BooksController < ApplicationController
 
   def show
     @book = Book.find(params[:id])
+    @review = Review.new
   end
 
   def new
@@ -17,6 +18,7 @@ class BooksController < ApplicationController
     @author_exists = Author.all.find_by(name: params[:author])
     @author = @author_exists.nil? ? Author.create(name: params[:book][:author]) : @author_exists
     # binding.pry
+
     @book = Book.new(book_params)
     @book.author_id = @author.id
     @book.save

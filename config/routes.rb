@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  get 'reviews/create'
+  get 'reviews/new'
   devise_for :users
   get 'authors/index'
   get 'authors/show'
@@ -14,6 +16,8 @@ Rails.application.routes.draw do
   get '/books/:id', to: 'books#show', as: :book
   get '/authors/:id', to:'authors#show', as: :author
   delete '/authors/:id', to:'authors#delete', as: :delete_author
+  get '/reviews/new', to:'reviews#new'
+  post '/reviews/create', to:'reviews#create', as: :create_review
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

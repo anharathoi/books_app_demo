@@ -3,10 +3,10 @@
   <%= f.text_field :title %>
 
   <%= f.label :author %>
-  <%= f.text_field :author, value: @book.author.name %>
+  <%= select_tag "name", options_for_select(Author.all.collect{ |u| [u.name] }) %>
 
   <%= f.label :description %>
   <%= f.text_field :description %>
 
-  <%= f.submit %>
+  <%= f.submit 'Update book', class: 'btn btn-primary' %>
 <% end %>

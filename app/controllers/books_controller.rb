@@ -1,5 +1,5 @@
 class BooksController < ApplicationController
-
+  authorize_resource
   def index
     @books = Book.includes(:author).all
     # render :test # testing different name of view and controller

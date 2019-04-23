@@ -1,7 +1,3 @@
 class Author < ApplicationRecord
-  has_many :books
-
-  def author_rating
-    
-  end
+  has_many :books, :dependent => :delete_all
 end

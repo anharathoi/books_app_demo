@@ -13,6 +13,7 @@ Rails.application.routes.draw do
   delete '/books/:id', to: 'books#delete'
   get '/books/:id', to: 'books#show', as: :book
   get '/authors/:id', to:'authors#show', as: :author
+  delete '/authors/:id', to:'authors#delete', as: :delete_author
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

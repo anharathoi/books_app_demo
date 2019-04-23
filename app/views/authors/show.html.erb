@@ -4,4 +4,5 @@
   <% @author.books.each do |book| %>
     <p><%= book.title  %></p>
   <% end %>
+  <%= link_to "Delete Author", delete_author_path(@author), method: :delete %>
 </div>

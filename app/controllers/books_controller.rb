@@ -3,7 +3,6 @@ class BooksController < ApplicationController
   skip_authorize_resource :only => [:new, :create]
   def index
     @books = Book.includes(:author).all
-    # render :test # testing different name of view and controller
   end
 
   def show
@@ -39,11 +38,6 @@ class BooksController < ApplicationController
     @book.update(book_params)
     @book.author_id =  @author.id
     @book.save
-
-    # @book.title = params[:book][:title]
-    # @book.author = params[:book][:author]
-    # @book.description = params[:book][:description]
-    # @book.save
     redirect_to root_path
   end
   

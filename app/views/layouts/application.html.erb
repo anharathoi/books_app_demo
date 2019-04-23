@@ -13,13 +13,17 @@
     <header>
     <h1> Books </h1>
     <li><%= link_to "Home", books_path %><li>
-    <li><%= link_to "Add a new book", books_new_path %><li>
     <% if user_signed_in? %>
         <li>
           <ul>
+            <% if can? :create, Book %>
+              <li><%= link_to "Add a new book", books_new_path %><li>
+            <% end %>
+
             <li><%= link_to 'Profile', edit_user_registration_path %></li>
             <li><%= link_to 'Log out', destroy_user_session_path, method: :delete %></li>
           </ul>
+          <li><%= current_user.email  %>, you are currently signed in</li>
         </li>
       <% else %>
         <li><%= link_to 'Log In', new_user_session_path %></li>

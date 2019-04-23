@@ -8,6 +8,7 @@ class AuthorsController < ApplicationController
 
   def delete
     @author = Author.find(params[:id])
+    @author.books.map(&:destroy)
     @author.destroy
 
     redirect_to root_path

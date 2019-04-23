@@ -13,6 +13,9 @@
  *= require_tree .
  *= require_self
  */
+ html {
+   margin: 0;
+ }
  header {
    position: sticky;
    top: 0;
@@ -33,3 +36,7 @@ header li {
    list-style: none;
  }
 
+.btn {
+  width: 200px;
+  margin-top: 20px;
+}

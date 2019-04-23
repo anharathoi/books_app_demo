@@ -1,5 +1,6 @@
 class BooksController < ApplicationController
-  authorize_resource
+  load_and_authorize_resource
+  skip_authorize_resource :only => [:new, :create]
   def index
     @books = Book.includes(:author).all
     # render :test # testing different name of view and controller
@@ -11,19 +12,23 @@ class BooksController < ApplicationController
   end
 
   def new
-    @book = Book.new
+    unless current_user.nil?
+      @book = Book.new
+    end
   end
 
   def create
-    @author_exists = Author.all.find_by(name: params[:author])
-    @author = @author_exists.nil? ? Author.create(name: params[:book][:author]) : @author_exists
-    # binding.pry
+    unless current_user.nil?
+      @author_exists = Author.all.find_by(name: params[:author])
+      @author = @author_exists.nil? ? Author.create(name: params[:book][:author]) : @author_exists
+      # binding.pry
 
-    @book = Book.new(book_params)
-    @book.author_id = @author.id
-    @book.save
+      @book = Book.new(book_params)
+      @book.author_id = @author.id
+      @book.save
 
-    redirect_to root_path
+      redirect_to root_path
+    end
   end
   
   def edit

@@ -8,10 +8,18 @@
 
 
 puts 'Creating an admin user'
-User.create({ :email => 'admin@admin.com.au', :password => 'password321', :password_confirmation => 'password321', :admin => true, moderator: false})
+admin = User.create({ :email => 'admin@admin.com.au', :password => 'password321', :password_confirmation => 'password321', :admin => true, moderator: false})
+puts admin.email
 
+puts 'Creating a regular user'
+regular = User.create({ :email => 'test@test.com.au', :password => '123456', :password_confirmation => '123456', :admin => false, moderator: false})
+puts regular.email
 
-puts 'Creating books and authors'
+puts 'Creating a user with moderator privilege'
+moderator = User.create({ :email => 'moderator@moderator.com.au', :password => '123456', :password_confirmation => '123456', :admin => false, moderator: true})
+puts regular.moderator
+
+puts 'Creating books, authors and reviews'
 
 10.times do 
   author_name = Faker::Book.author

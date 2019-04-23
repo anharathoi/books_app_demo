@@ -9,10 +9,13 @@ class Ability
       user ||= User.new # guest user (not logged in)
       if user.admin?
         can :manage, :all
-      elsif user.moderator?
-        can [:read,:delete], :all
-      else
+      elsif user.email.nil?
         can :read, :all
+      elsif user.moderator?
+        can :read, :all
+        can :delete, Review
+      else
+        can [:read,:create], Book
       end
     #
     # The first argument to `can` is the action you are giving the user

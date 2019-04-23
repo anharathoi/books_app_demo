@@ -18,6 +18,7 @@ Rails.application.routes.draw do
   delete '/authors/:id', to:'authors#delete', as: :delete_author
   get '/reviews/new', to:'reviews#new'
   post '/reviews/create', to:'reviews#create', as: :create_review
+  delete '/reviews/:id', to:'reviews#delete', as: :delete_review
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

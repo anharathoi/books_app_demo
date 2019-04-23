@@ -12,6 +12,12 @@ class ReviewsController < ApplicationController
     # binding.pry
   end
 
+  def delete
+    @review = Review.find(params[:id])
+    @book = @review.book
+    @review.destroy
+    redirect_to book_path(@book)
+  end
 
   private
     def review_params

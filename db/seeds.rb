@@ -13,8 +13,9 @@
   5.times do
     title = Faker::Book.title
     description = Faker::Book.genre
+    rating = rand(1..5)
     # author_id = author.id
-    book = Book.new({title: title, description: description})
+    book = Book.new({title: title, description: description, rating: rating})
     book.author_id = author.id
     book.save
   end

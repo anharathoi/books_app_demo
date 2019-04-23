@@ -7,6 +7,12 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 
+puts 'Creating an admin user'
+User.create({ :email => 'admin@admin.com.au', :password => 'password321', :password_confirmation => 'password321', :admin => true, moderator: false})
+
+
+puts 'Creating books and authors'
+
 10.times do 
   author_name = Faker::Book.author
   author = Author.create({name: author_name})
@@ -18,6 +24,11 @@
     book = Book.new({title: title, description: description, rating: rating})
     book.author_id = author.id
     book.save
+
+    3.times do
+      book.reviews.create({title: Faker::Artist.name, review: Faker::Restaurant.review})
+    end
   end
-  
 end
+
+puts "Seeding Over"

@@ -2,7 +2,7 @@ class BooksController < ApplicationController
   load_and_authorize_resource
   skip_authorize_resource :only => [:new, :create]
   def index
-    @books = Book.includes(:author).all
+    @books = Book.includes(:authors).all
   end
 
   def show
@@ -13,6 +13,7 @@ class BooksController < ApplicationController
   def new
     unless current_user.nil?
       @book = Book.new
+      @authors = Author.all
     end
   end
 
@@ -20,7 +21,14 @@ class BooksController < ApplicationController
     unless current_user.nil?
       @author = Author.all.find_by(name: params[:name])
       @book = Book.new(book_params)
-      @book.author_id = @author.id
+      @book.authors = []
+
+      params[:book][:author_ids].each do |author_id|
+        unless author_id.empty?
+          author = Author.find(author_id)
+          @book.authors << author
+        end
+      end
       @book.save
 
       redirect_to root_path
@@ -36,7 +44,13 @@ class BooksController < ApplicationController
     @book = Book.find(params[:id])
     @author = Author.all.find_by(name: params[:name])
     @book.update(book_params)
-    @book.author_id =  @author.id
+    @book.authors = []
+    params[:book][:author_ids].each do |author_id|
+      unless author_id.empty?
+        author = Author.find(author_id)
+        @book.authors << author
+      end
+    end
     @book.save
     redirect_to root_path
   end

@@ -23,14 +23,19 @@ puts 'Creating books, authors and reviews'
 
 10.times do 
   author_name = Faker::Book.author
-  author = Author.create({name: author_name})
+  first_author = Author.create({name: author_name})
+  author_name = Faker::Book.author
+  second_author = Author.create({name: author_name})
+  author_name = Faker::Book.author
+  third_author = Author.create({name: author_name})
   5.times do
     title = Faker::Book.title
     description = Faker::Book.genre
     rating = rand(1..5)
-    # author_id = author.id
     book = Book.new({title: title, description: description, rating: rating})
-    book.author_id = author.id
+    book.authors << first_author
+    book.authors << second_author if rand(1..5) > 3
+    book.authors << third_author if rand(1..5) > 3
     book.save
 
     3.times do

@@ -1,7 +1,11 @@
 <div class="show-page">
   <h2><%= @book.title %></h2>
   <hr>
-  <p>Author: <%=link_to  @book.author.name.upcase, author_path(@book.author) %></p>
+  <p>Author: 
+    <% @book.authors.each do |author| %>
+      <%=link_to author.name.upcase, author_path(author) %><br />
+    <% end %>
+  </p>
   <p>Genre: <%= @book.description %></p>
   <% if can? :update, @book %>
     <%= link_to "edit", edit_book_path(@book) %> |

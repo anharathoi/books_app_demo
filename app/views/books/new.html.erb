@@ -3,8 +3,8 @@
     <%= f.label :title %>
     <%= f.text_field :title %>
 
-    <%= f.label :author %>
-    <%= select_tag "name", options_for_select(Author.all.collect{ |u| [u.name] }) %>
+    <%= f.label :authors %>
+    <%= collection_select(:book, :author_ids, Author.all, :id, :name, {}, { :multiple => true } )%>
 
     <%= f.label :description, 'Genre' %>
     <%= f.text_field :description %>

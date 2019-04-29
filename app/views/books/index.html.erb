@@ -4,7 +4,11 @@
       <div class="book-card bg-light">
         <div class="book-description">
           <h4> <%= book.title %></h4>
-          <h5>by <%= book.author.name %></h5>
+          <h5>by 
+            <% book.authors.each do |author| %>
+              <%= author.name %><br />
+            <% end %>
+          </h5>
           <p> Genre: <%= book.description %></p>
           <p> Rating: <%= book.rating %></p>
         </div>

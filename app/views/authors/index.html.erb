@@ -1,2 +1,7 @@
-<h1>Authors#index</h1>
+<h1>Authors</h1>
 <p>Find me in app/views/authors/index.html.erb</p>
+
+
+<% @authors.each do |author| %>
+    <p><%=link_to author.name.upcase, author_path(author) %></p>
+<% end %>
